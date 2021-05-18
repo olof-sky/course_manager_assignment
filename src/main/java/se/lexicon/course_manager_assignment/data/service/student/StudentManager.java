@@ -8,7 +8,7 @@ import se.lexicon.course_manager_assignment.data.service.converter.Converters;
 import se.lexicon.course_manager_assignment.dto.forms.CreateStudentForm;
 import se.lexicon.course_manager_assignment.dto.forms.UpdateStudentForm;
 import se.lexicon.course_manager_assignment.dto.views.StudentView;
-
+import se.lexicon.course_manager_assignment.model.Student;
 
 import java.util.List;
 
@@ -33,31 +33,41 @@ public class StudentManager implements StudentService {
 
     @Override
     public StudentView update(UpdateStudentForm form) {
+        for (Student student : studentDao.findAll()){
+            if (student.getId() == form.getId()){
+                student.setName(form.getName());
+                student.setEmail(form.getEmail());
+                student.setAddress(form.getAddress());
+                return converters.studentToStudentView(student);
+            }
+        }
         return null;
     }
 
     @Override
     public StudentView findById(int id) {
-        return null;
+        return converters.studentToStudentView(studentDao.findById(id));
     }
 
     @Override
     public StudentView searchByEmail(String email) {
-        return null;
+        return converters.studentToStudentView(studentDao.findByEmailIgnoreCase(email));
     }
 
     @Override
     public List<StudentView> searchByName(String name) {
-        return null;
+        List<StudentView> studentViewList = null;
+        studentViewList.addAll(converters.studentsToStudentViews(studentDao.findByNameContains(name)));
+        return studentViewList;
     }
 
     @Override
     public List<StudentView> findAll() {
-        return null;
+        return converters.studentsToStudentViews(studentDao.findAll());
     }
 
     @Override
     public boolean deleteStudent(int id) {
-        return false;
+        return studentDao.removeStudent(studentDao.findById(id));
     }
 }
