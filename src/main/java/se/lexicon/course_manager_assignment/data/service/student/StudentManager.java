@@ -51,14 +51,18 @@ public class StudentManager implements StudentService {
     }
 
     @Override
-    public StudentView searchByEmail(String email) {
+    public StudentView searchByEmail(String email){
         return converters.studentToStudentView(studentDao.findByEmailIgnoreCase(email));
     }
 
     @Override
     public List<StudentView> searchByName(String name) {
         List<StudentView> studentViewList = new ArrayList<>();
-        studentViewList.addAll(converters.studentsToStudentViews(studentDao.findByNameContains(name)));
+        for (Student student : studentDao.findAll()){
+            if (student.getName().equalsIgnoreCase(name)){
+                studentViewList.add(converters.studentToStudentView(student));
+            }
+        }
         return studentViewList;
     }
 
