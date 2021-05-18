@@ -7,6 +7,7 @@ import se.lexicon.course_manager_assignment.model.Course;
 import se.lexicon.course_manager_assignment.model.Student;
 
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
@@ -24,7 +25,7 @@ public class ModelToDto implements Converters {
 
     @Override
     public List<CourseView> coursesToCourseViews(Collection<Course> courses) {
-        List<CourseView> courseViewList = null;
+        List<CourseView> courseViewList = new ArrayList<>();
         for (Course course : courses){
             courseViewList.add(courseToCourseView(course));
         }
@@ -33,7 +34,7 @@ public class ModelToDto implements Converters {
 
     @Override
     public List<StudentView> studentsToStudentViews(Collection<Student> students) {
-        List<StudentView> studentViewList = null;
+        List<StudentView> studentViewList = new ArrayList<>();
         for (Student student : students){
             studentViewList.add(studentToStudentView(student));
         }
