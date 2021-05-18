@@ -19,7 +19,9 @@ public class StudentCollectionRepository implements StudentDao {
 
     @Override
     public Student createStudent(String name, String email, String address) {
-        return new Student(StudentSequencer.nextStudentId(), name, email, address);
+        Student student = new Student(StudentSequencer.nextStudentId(), name, email, address);
+        students.add(student);
+        return student;
     }
 
     @Override
