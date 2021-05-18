@@ -10,6 +10,7 @@ import se.lexicon.course_manager_assignment.dto.forms.UpdateStudentForm;
 import se.lexicon.course_manager_assignment.dto.views.StudentView;
 import se.lexicon.course_manager_assignment.model.Student;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -56,7 +57,7 @@ public class StudentManager implements StudentService {
 
     @Override
     public List<StudentView> searchByName(String name) {
-        List<StudentView> studentViewList = null;
+        List<StudentView> studentViewList = new ArrayList<>();
         studentViewList.addAll(converters.studentsToStudentViews(studentDao.findByNameContains(name)));
         return studentViewList;
     }
