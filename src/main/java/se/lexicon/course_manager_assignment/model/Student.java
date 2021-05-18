@@ -17,8 +17,6 @@ public class Student {
         this.address = address;
     }
 
-    public Student(String name, String email, String address){ this(StudentSequencer.nextStudentId(), name, email, address); }
-
     public int getId() {
         return id;
     }
