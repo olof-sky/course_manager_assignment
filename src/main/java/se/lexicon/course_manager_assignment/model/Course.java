@@ -54,6 +54,8 @@ public class Course {
 
     public boolean enrollStudent(Student student){ return students.add(student); }
 
+    public boolean unEnrollStudent(Student student){ return students.remove(student); }
+
     @Override
     public String toString() {
         return "Course{" +
