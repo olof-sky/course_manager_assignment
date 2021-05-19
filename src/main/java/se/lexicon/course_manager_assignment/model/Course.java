@@ -3,6 +3,7 @@ package se.lexicon.course_manager_assignment.model;
 import se.lexicon.course_manager_assignment.data.sequencers.CourseSequencer;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Objects;
 
@@ -13,8 +14,8 @@ public class Course {
     private int weekDuration;
     Collection<Student> students;
 
-    public Course(String courseName, LocalDate startDate, int weekDuration) {
-        this.id = CourseSequencer.nextCourseId();
+    public Course(int id, String courseName, LocalDate startDate, int weekDuration) {
+        this.id = id;
         this.courseName = courseName;
         this.startDate = startDate;
         this.weekDuration = weekDuration;
@@ -52,7 +53,11 @@ public class Course {
 
     public void setStudents(Collection<Student> students) { this.students = students; }
 
-    public boolean enrollStudent(Student student){ return students.add(student); }
+    public boolean enrollStudent(Student student){
+        if (!student.equals(null) || !students.equals(null)){ students = new ArrayList<>(); }
+        if (students.contains(student)){ return false; }
+        return students.add(student);
+    }
 
     public boolean unEnrollStudent(Student student){ return students.remove(student); }
 
