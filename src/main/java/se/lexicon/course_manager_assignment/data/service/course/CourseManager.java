@@ -37,6 +37,14 @@ public class CourseManager implements CourseService {
 
     @Override
     public CourseView update(UpdateCourseForm form) {
+        for (Course course : courseDao.findAll()){
+            if (course.getId() == form.getId()){
+                course.setCourseName(form.getCourseName());
+                course.setStartDate(form.getStartDate());
+                course.setWeekDuration(form.getWeekDuration());
+                return converters.courseToCourseView(course);
+            }
+        }
         return null;
     }
 
@@ -47,12 +55,12 @@ public class CourseManager implements CourseService {
 
     @Override
     public List<CourseView> searchByDateBefore(LocalDate end) {
-        return null;
+        return converters.coursesToCourseViews(courseDao.findByDateBefore(end));
     }
 
     @Override
     public List<CourseView> searchByDateAfter(LocalDate start) {
-        return null;
+        return converters.coursesToCourseViews(courseDao.findByDateAfter(start));
     }
 
     @Override
