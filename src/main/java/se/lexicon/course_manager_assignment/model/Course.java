@@ -54,7 +54,8 @@ public class Course {
     public void setStudents(Collection<Student> students) { this.students = students; }
 
     public boolean enrollStudent(Student student){
-        if (!student.equals(null) || !students.equals(null)){ students = new ArrayList<>(); }
+        if (student == null) {return false;}
+        if (students == null) { students = new ArrayList<>();}
         if (students.contains(student)){ return false; }
         return students.add(student);
     }
