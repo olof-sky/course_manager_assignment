@@ -15,19 +15,23 @@ import java.util.List;
 public class ModelToDto implements Converters {
     @Override
     public StudentView studentToStudentView(Student student) {
+        if (student == null){ return null;}
         return new StudentView(student.getId(), student.getName(), student.getEmail(), student.getAddress());
     }
 
     @Override
     public CourseView courseToCourseView(Course course) {
+        if (course == null){return null;}
         return new CourseView(course.getId(), course.getCourseName(), course.getStartDate(), course.getWeekDuration(), studentsToStudentViews(course.getStudents()));
     }
 
     @Override
     public List<CourseView> coursesToCourseViews(Collection<Course> courses) {
         List<CourseView> courseViewList = new ArrayList<>();
-        for (Course course : courses){
-            courseViewList.add(courseToCourseView(course));
+        if (courses != null){
+            for (Course course : courses) {
+                courseViewList.add(courseToCourseView(course));
+            }
         }
         return courseViewList;
     }
