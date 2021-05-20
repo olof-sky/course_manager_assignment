@@ -50,23 +50,23 @@ public class CourseCollectionRepository implements CourseDao{
 
     @Override
     public Collection<Course> findByDateBefore(LocalDate end) {
-        Collection<Course> courses = new ArrayList<>();
+        Collection<Course> coursesReturn = new ArrayList<>();
         for (Course course : courses){
                 if (course.getStartDate().isBefore(end)){
-                    courses.add(course);
-                }return courses;
+                    coursesReturn.add(course);
+                }return coursesReturn;
             }
         return null;
     }
 
     @Override
     public Collection<Course> findByDateAfter(LocalDate start) {
-            Collection<Course> courses = new ArrayList<>();
-            for (Course course : courses){
-                if (course.getStartDate().isAfter(start)){
-                    courses.add(course);
-                }return courses;
-            }
+        Collection<Course> coursesReturn = new ArrayList<>();
+        for (Course course : courses){
+            if (course.getStartDate().isAfter(start)){
+                coursesReturn.add(course);
+            }return coursesReturn;
+        }
         return null;
     }
 
